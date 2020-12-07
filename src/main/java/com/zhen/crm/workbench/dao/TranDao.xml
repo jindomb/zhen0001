@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhen.crm.workbench.dao.TranDao">
+
+    <select id="getCountByStage" resultType="map">
+        select count(stage) value,stage name
+        from tbl_tran
+        group by stage
+    </select>
+
+    <select id="count" resultType="int">
+        select count(id) from tbl_tran
+    </select>
+
+    <update id="update">
+        update tbl_tran set stage=#{stage},editBy=#{editBy},editTime=#{editTime} where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="Tran">
+        select
+            t.id,
+            u.name owner,
+            t.money,
+            t.name,
+            t.expectedDate,
+            cu.name customerId,
+            t.stage,
+            t.type,
+            t.source,
+            a.name activityId,
+            co.fullname contactsId,
+            t.createBy,
+            t.createTime,
+            t.editBy,
+            t.editTime,
+            t.description,
+            t.contactSummary,
+            t.nextContactTime
+        from tbl_tran t
+        join tbl_user u
+        on t.owner=u.id
+        join tbl_customer cu
+        on t.customerId=cu.id
+        left join tbl_contacts co
+        on t.contactsId=co.id
+        left join tbl_activity a
+        on t.activityId=a.id
+        where t.id=#{id}
+    </select>
+
+    <insert id="insert">
+        insert into tbl_tran(
+            id,
+            owner,
+            money,
+            name,
+            expectedDate,
+            customerId,
+            stage,
+            type,
+            source,
+            activityId,
+            contactsId,
+            createBy,
+            createTime,
+            description,
+            contactSummary,
+            nextContactTime
+        )values(
+            #{id},
+            #{owner},
+            #{money},
+            #{name},
+            #{expectedDate},
+            #{customerId},
+            #{stage},
+            #{type},
+            #{source},
+            #{activityId},
+            #{contactsId},
+            #{createBy},
+            #{createTime},
+            #{description},
+            #{contactSummary},
+            #{nextContactTime}
+        )
+    </insert>
+
+</mapper>

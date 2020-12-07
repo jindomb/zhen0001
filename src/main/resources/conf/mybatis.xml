@@ -3,15 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!--<settings>
+    <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
-    </settings>-->
+    </settings>
 
     <typeAliases>
-        <package name="com.zhen.entity"/>
+        <package name="com.zhen.crm.settings.domain"/>
+        <package name="com.zhen.crm.workbench.domain"/>
     </typeAliases>
 
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
     <mappers>
-        <package name="com.zhen.dao"/>
+        <package name="com.zhen.crm.settings.dao"/>
+        <package name="com.zhen.crm.workbench.dao"/>
     </mappers>
 </configuration>

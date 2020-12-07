@@ -5,16 +5,23 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.zhen.controller"/>
+    <context:component-scan base-package="com.zhen.crm.settings.web.controller,com.zhen.crm.workbench.web.controller"/>
+
+    <context:component-scan base-package="com.zhen.crm.handler"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+<!--        <property name="prefix" value="/WEB-INF/jsp/"/>-->
         <property name="suffix" value=".jsp"/>
     </bean>
 
     <mvc:annotation-driven/>
-
-    <mvc:resources mapping="/static/**" location="/static/"/>
+    
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.zhen.crm.web.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
 
 
 </beans>
